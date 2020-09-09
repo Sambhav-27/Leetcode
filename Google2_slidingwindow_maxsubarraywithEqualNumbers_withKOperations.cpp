@@ -39,7 +39,7 @@ int fun(int*a, int n, int k) {
             end++;
             sum += a[end];
             
-            // while increaing elements will be added
+            // while increaing elements will be added at back in sorted order; front has largest
             while(!q.empty() && a[q.back()] <= a[end]) q.pop_back();
             q.push_back(end);
             
