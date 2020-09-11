@@ -31,6 +31,8 @@ int n,m,s,a[N];
 
 // check if it is possible to have minimum value in array = minVal in <= m operation
 // 1 operation = increment all elemnts any subarray of size s by 1
+/* Every time we take left most element which is not yet >= k and update this element, while updating we know that all elements left to current are >=k . So we use the sub array only to the right thus making this greedy algo optimal.
+*/
 bool possible(int minVal) {
     
     int i,ans = 0, needed[N] = {0}; // needed[i] will store extra increments required by ith element apart form its neigbors.
