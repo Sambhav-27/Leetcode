@@ -89,7 +89,7 @@ lld query(Node* root, int q, int k) {
     return ans;
 }
  
-// returns true if (total subarrays with xor < k) is >=totsubArraysLowerLimit
+// returns true if (total subarrays with xor <= k) is >=totsubArraysLowerLimit
 bool fun(vector<int> a, lld n, lld k, int totsubArraysLowerLimit) {
     lld i, prefix =0, ans =0;
     Node * root = new Node();
