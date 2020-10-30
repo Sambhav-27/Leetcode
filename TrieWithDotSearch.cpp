@@ -2,6 +2,7 @@
 
 Remember that end=1 can also happend in middle of true; when one string is prefix of another.
 Ex- a,aa
+if there is dot(.), we apply dfs from that node. worst case it will check all chars of trie
 
 Note trie is a different data structure * node is different;
 So these two will have different classes.
