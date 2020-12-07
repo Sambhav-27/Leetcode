@@ -11,6 +11,7 @@ When you encounter a start point, put it in the data structure(ds). This ds will
 When you encounter an end point, remove it from the ds.
 At every line take the max from the ds, and put it in the answer.
     ans = (x coordinate of current line, max from ds)
+    We only take the current max if it is different from the previous max else there is no point in taking it as it will be a redundant point. So we keep a variable to store the previous max without considering current building.
     
     
 We just need to take care of cases when start and end of buildings concide & these building can have same/different hts.
