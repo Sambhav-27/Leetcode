@@ -41,6 +41,7 @@ x = INF
 dp[i] = min(dp[i], cur)  // here i is the pos of next greater element.
 
 Thus we can use binary search and thus time is nlogn.
+Now after all this we traverse the dp array and find the largest non INF value.
 
 https://cp-algorithms.com/sequences/longest_increasing_subsequence.html
 
