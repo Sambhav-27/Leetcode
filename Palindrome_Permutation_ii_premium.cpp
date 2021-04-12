@@ -41,6 +41,26 @@ public:
         return palind;
     }
 
+     // this method requries sorting
+//     void fun(string t, int j) {
+//         if(j == t.length()-1) { // notice till n-1
+//             ans.push_back(make(t)); // O(n) comes from here
+//             return;
+//         }
+
+//         for(int i=j; i<t.length(); ++i) {
+//             if(i > j && t[i] == t[j])
+//                 continue;
+
+//             // if(i > 0 && t[i-1] == t[i]) // is working without this; GFG has this check
+//             //     continue;
+
+//             swap(t[j], t[i]);
+//             fun(t, j+1);
+//             swap(t[j], t[i]); 
+//         }
+//     }
+    
     void fun(string t, int j) {
         if(j == t.length()-1) { // notice till n-1
             ans.push_back(make(t)); // O(n) comes from here
