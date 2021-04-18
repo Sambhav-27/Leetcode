@@ -42,20 +42,17 @@ public:
             return {true, v.second};
         }
         
-        double ans = v.second;
-        bool found = false;
         
         for(auto c: gr[v.first]) {
             if(!visited[c.first]) {
                 auto cur = dfs(c, dst);
                 if(cur.first) { // found in this subtree
-                    found = true;
-                    ans *= cur.second; // multiply ans of subtree
+                    return {true, v.second * cur.second};
                 }
             }
         }
         
-        return {found, ans};
+        return {false, 0};
     }
     
     bool dfs(pii v, int dst, double &ans) {
