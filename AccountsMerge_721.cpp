@@ -84,32 +84,65 @@ public:
             }
         }
         
-        vector<unordered_set<string>> b(n);
-        vector<string> names(n);
+
         
-        // form a set for every vector
+        unordered_map<int, set<string>> m; // set is used to  remove duplicate elements.
+        unordered_map<int, string> names;
+        
         for(int i=0; i<n; ++i) {
-            unordered_set<string> s(a[i].begin()+1, a[i].end());
-            names[i] = a[i][0]; // store the first element of every list cause we don't want to sort first element.
-            b[i] = s;
-        }
-        
-        for(int i=0; i<n; ++i){
+            names[i] = a[i][0]; // get the name
+            
             int p = findParent(i);
-            copy(a[i].begin()+1, a[i].end(), inserter(b[p], b[p].end())); // add the current element to its parent's set; When p[i] = i then also it's fine cause set won't have duplicate elements
-        }
-        
-        // add sets of all parents to output.
-        for(int i=0; i<n; ++i) {
-            if(findParent(i) == i) {
-                vector<string> v;
-                v.push_back(names[i]);
-                v.insert(v.end(), b[i].begin(), b[i].end());
-                
-                sort(v.begin()+1, v.end());
-                ans.push_back(v);
+            
+            if(m.find(p) == m.end()) { // inserting for fist time
+                m[p] = set<string>(a[i].begin()+1, a[i].end());
+            }
+            else { // insert to end of set
+                copy(a[i].begin()+1, a[i].end(), inserter(m[p], m[p].end())); // i behind p
             }
         }
+        
+        for(auto it: m) {
+            set<string> st = it.second;
+            
+            vector<string> v;
+            v.push_back(names[it.first]); // insert the names
+            
+            copy(st.begin(), st.end(), inserter(v, v.end())); // insert emails
+            
+            ans.push_back(v);
+        }
+        
+        
+        
+        // following also works.
+        // vector<unordered_set<string>> b(n);
+        // vector<string> names(n);
+        
+        
+//         // form a set for every vector
+//         for(int i=0; i<n; ++i) {
+//             unordered_set<string> s(a[i].begin()+1, a[i].end());
+//             names[i] = a[i][0]; // store the first element of every list cause we don't want to sort first element.
+//             b[i] = s;
+//         }
+        
+//         for(int i=0; i<n; ++i){
+//             int p = findParent(i);
+//             copy(a[i].begin()+1, a[i].end(), inserter(b[p], b[p].end())); // add the current element to its parent's set; When p[i] = i then also it's fine cause set won't have duplicate elements
+//         }
+        
+//         // add sets of all parents to output.
+//         for(int i=0; i<n; ++i) {
+//             if(findParent(i) == i) {
+//                 vector<string> v;
+//                 v.push_back(names[i]);
+//                 v.insert(v.end(), b[i].begin(), b[i].end());
+                
+//                 sort(v.begin()+1, v.end());
+//                 ans.push_back(v);
+//             }
+//         }
         
         return ans;
     }
