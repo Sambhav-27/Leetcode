@@ -11,6 +11,8 @@
 
 /*
 
+https://medium.com/algorithm-and-datastructure/employee-free-time-795c7682c973
+
 Accepted on lintcode.
 Similar to merge k sorted arrays.
 Here we merge k sorted arrays where each element is an interval.
@@ -22,6 +24,13 @@ o(nk log(k));
 Alternative:
 Put all intervals in one array and then sort.
 Time: O(nk log(nk))
+
+
+This code merges the intervals also while merging the sorted arrays.
+Another approach:
+
+Just merge the arrays in one using heap.
+And then merge intervals & find the answer just like in fun()
 
 */
 
@@ -56,6 +65,38 @@ public:
         }
         return true;
     }
+    
+     // nklognk approach
+    vector<Interval> fun(vector<vector<Interval>> &a) {
+        vector<Interval> all;
+        for(auto x: a) {
+            all.insert(all.end(), x.begin(), x.end());
+        }
+
+        sort(all.begin(), all.end(), sortcomp); // sort by start
+       
+       // Now we find empty slots in the intervals
+        vector<Interval> ans;
+
+        if(all.size() == 0) {
+            return ans;
+        }
+
+        Interval cur = all[0];
+
+        // merging & adding spaces to answer
+        for(int j=1; j<all.size(); ++j) {
+            if(overlaps(cur, all[j])) {
+                cur.end = max(cur.end, all[j].end);
+                continue;
+            }
+            
+            ans.pb(Interval(cur.end, all[j].start));
+            cur = all[j];
+        }
+        return ans;
+    }
+
 
     /**
      * @param schedule: a list schedule of employees
@@ -126,12 +167,8 @@ public:
 
         cur = merged[0];
 
+        // intervals are already merged & sorted by start
         for(int j=1; j<merged.size(); ++j) {
-            if(overlaps(cur, merged[j])) {
-                cur.end = merged[j].end;
-                continue;
-            }
-            
             ans.pb(Interval(cur.end, merged[j].start));
             cur = merged[j];
         }
