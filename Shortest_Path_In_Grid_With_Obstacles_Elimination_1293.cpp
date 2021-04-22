@@ -6,6 +6,8 @@ x,y,obstaclesSeenSoFar,level
 
 push only those children, if including those obstcles count is <= k
 
+Time: mnk
+
 */
 
 #define N 50
