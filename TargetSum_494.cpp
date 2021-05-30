@@ -4,8 +4,9 @@ Difficult to do it in bottom up dp, as there can be negative sum.
 But easy with top down approach.
 Also, using a map for dp array.
 
-*/
+a[i] & target both can be negative
 
+*/
 #define N 1005
 
 class Solution {
@@ -19,13 +20,13 @@ public:
         if(s > N) // given that arrays sum is less than 1000 but s can be up to 10^9
             return 0;
         
-        if(j == a.size()-1) {
-           if(s == a[j] && -s == a[j]) // input can have 0
-               return 2;
-            else if(abs(s) == a[j])
-               return 1;
+        if(j == a.size()) {
+            if(s == 0) {
+                return 1;
+            }
             return 0;
         }
+       
         
         if(dp[j].find(s) != dp[j].end())
             return dp[j][s];
