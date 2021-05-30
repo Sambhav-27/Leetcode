@@ -1,6 +1,7 @@
 // backtracking
 // do it carefully, seems complicated.
 // time: n^n; At each step, tree can have n options in worst case
+// we can even store the total sentences for every index but these words can be too many; So better to avoid it.
 
 class Solution {
 public:
