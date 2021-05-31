@@ -15,6 +15,33 @@ How to do it in code:
 Make sure to reverse the string at the end in both the cases.
 https://math.stackexchange.com/questions/408761/hexadecimal-value-of-a-negative-number
 
+
+
+Hex to Decimal
+ffff ffff
+
+subtract from 15 & add 1
+0000 0001
+
+How do we know if a hex number represents negative decimal?
+Convert to binary & see the left most bit. If it 1 then it is a negative number.
+That means leftmost value should be >8;
+
+1 can be added after converting to decimal.
+
+-13324 = "ffff cbf4"
+
+Negative:
+0000 340a
+
+3*16^3 + 4*16^2 + 0 *16^1 + 11*16^0
+
+= 12,288 + 1024 + 11
+= 13323
++ 1
+
+= 13324
+
 */
 
 
