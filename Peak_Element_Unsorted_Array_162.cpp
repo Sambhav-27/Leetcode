@@ -40,4 +40,26 @@ public:
         }
         return b; // notice this
     }
+    
+    // this also works
+    int findPeakElement(vector<int>& a) {
+        
+        int b = 0;
+        int e = a.size()-1;
+        
+        int ans = b;
+        while(b < e ) {  // notice no equal
+            
+            int m = b + (e-b)/2;
+            
+            if(a[m] < a[m+1]) {
+                ans = m+1;
+                b = m+1;
+            }
+            else {
+                e = m;
+            }
+        }
+        return ans; 
+    }
 };
