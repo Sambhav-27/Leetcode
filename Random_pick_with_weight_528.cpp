@@ -39,6 +39,27 @@ public:
         return -1;
     }
     
+     // this also works
+    int fun(vector<int> a, int k) {
+        int b = 0;
+        int e = a.size()-1;
+        
+        int ans = e+1;
+        
+        while(b<=e) {
+            int m = b + (e-b)/2;
+            
+            if(a[m] > k) {
+                ans = m;
+                e = m-1;
+            }
+            else {
+                b = m+1;
+            }
+        }
+        return ans;
+    }
+    
     Solution(vector<int>& a) {
         
         srand(time(NULL)); // this should be done only once.
