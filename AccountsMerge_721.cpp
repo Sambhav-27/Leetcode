@@ -147,3 +147,125 @@ public:
         return ans;
     }
 };
+
+
+
+
+
+
+
+
+/**
+traverse all the emails-
+Create a set for every email.
+Union cur email with the first email of this list
+
+So, if we encounter an email again, its id would be same. And we will union it with the first element of that list.
+In this way both lists would be unioned.
+
+Also maintain a map of email to name & email to set id
+
+Ex: ["a", "b"]
+    ["c", "b"]
+    
+    Here, first b will be unioned with a & then b will be unioned with c;
+    Thus a b c will have a common parent
+
+
+After all this, just traverse all the emails & put them in their parent's list
+
+
+Time: nlogn
+n = total emails
+
+*/
+
+#define N 100005
+
+class Solution {
+public:
+    
+    // int parent[N], rank[N];
+    vector<int> parent, rank;
+    
+    // void makeSet(int v) {
+    //     parent[v] = v;
+    //     rank[v] =0;
+    // }
+    
+    // notice this new function we are just inserting new element to our set space
+    int getId() {
+        int id = parent.size();
+        parent.push_back(id);
+        rank.push_back(0);
+        return id;
+    }
+    
+    int findParent(int v) {
+        if(parent[v] == v)
+            return v;
+        return parent[v] = findParent(parent[v]);
+    }
+    
+    void unionset(int a, int b) {
+        a = findParent(a);
+        b = findParent(b);
+        
+        if(a != b) {
+            if(rank[a] < rank[b])
+                swap(a, b);
+            // a will always be greater
+            parent[b] = a;
+            if(rank[a] == rank[b])
+                rank[a]++;
+        }
+    }
+    
+    vector<vector<string>> accountsMerge(vector<vector<string>>& a) {
+        
+        int n = a.size();
+        vector<vector<string>> ans;
+
+        unordered_map<string, int> emailToId;
+        unordered_map<string, string> emailToName;
+        
+        for(int i=0; i<n; ++i) {
+            for(int j=1; j<a[i].size(); ++j) {
+                string email = a[i][j];
+                
+                if(emailToId.find(email) == emailToId.end()) { // email seen for the first time; create a new set for it
+                    emailToId[email] = getId();
+                }
+                
+                emailToName[email] = a[i][0];
+                unionset(emailToId[email], emailToId[a[i][1]]); // union with first email of this list
+                
+            }
+        }
+        
+        
+        unordered_map<int, set<string>> m; // set is used to  remove duplicate elements.
+        
+        // traverse every email and add it to its parent list
+        for(auto kv: emailToId) {
+            int p = findParent(kv.second);
+            m[p].insert(kv.first);
+        }
+        
+       
+        // form the answer
+        for(auto it: m) {
+            
+            set<string> st = it.second;
+            
+            vector<string> v;
+            v.push_back(emailToName[*st.begin()]); // insert the names
+            
+            copy(st.begin(), st.end(), inserter(v, v.end())); // insert emails
+            
+            ans.push_back(v);
+        }
+
+        return ans;
+    }
+};
