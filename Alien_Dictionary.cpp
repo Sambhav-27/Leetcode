@@ -80,6 +80,7 @@ public:
   
         // traverse from back cause we want the lexicographically smallest string
         // and our dfs puts everything in stack & we later on reverse
+        // notice that we don't need to start dfs from root node, we can start from any node & pushing in stack takes care of that
         for(char ch = 'z'; ch>='a'; --ch) {
             if(!visited[ch] && gr.find(ch) != gr.end()) {
                 if(dfs(ch)) {    
