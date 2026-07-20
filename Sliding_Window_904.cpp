@@ -1,3 +1,54 @@
+
+// maximum window where distinct elements is 2
+class Solution {
+public:
+
+    map<int, int> m; // only holds the count of unique elements
+
+    bool valid() {
+        return m.size() <= 2;
+    }
+
+    void shrink(vector<int>&a, int l) {
+        m[a[l]]--;
+        if(m[a[l]] == 0) {
+            m.erase(a[l]); // this ensure we're able to calculate unique elements in map in O(1)
+        }
+    }
+
+    int totalFruit(vector<int>& a) {
+
+        
+        int ans = 0;
+        int l = 0, r= 0;
+
+        while(r < a.size()) {
+            m[a[r]]++;
+
+            // make the list valid by shrinking it if it became invalid after previous expansion
+            while(!valid() && l<=r) {
+                shrink(a, l);
+                l++;
+            }
+            ans = max(ans, r-l+1);
+            r++;
+        }
+        
+
+        return ans;
+    }
+};
+
+
+//--------------------------------------
+
+
+
+
+
+
+
+
 /**
 
 Max window with at most 2 distinct elements;
