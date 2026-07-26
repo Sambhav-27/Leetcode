@@ -1,7 +1,8 @@
 // min heap: O(nlogk)
 // quick select: O(n) but worst case is O(n^2)
 // Discard half each time: n+(n/2)+(n/4)..1 = n + (n-1) = O(2n-1) = O(n), because n/2+n/4+n/8+..1=n-1.
-// worst case occur when array is sorted & k =1
+// Worst-Case Time: O(n²), which happens if you pick bad pivots (like the smallest or largest number every time) on already sorted or tricky data.
+// e.g., worst case occur when array is sorted & k =1
 // [1,1,1,1,1] k=1; here pindex = 4,then 3 then2 then 1 then 0
 
 
