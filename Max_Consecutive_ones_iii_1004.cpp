@@ -13,6 +13,46 @@ O(n)
 class Solution {
 public:
     int longestOnes(vector<int>& a, int k) {
+
+        int l=0, r =0;
+        int ans = 0;
+        int consumed = 0;
+
+        while(r < a.size()) {
+            if(a[r] == 1) {
+                r++;
+            }
+            else if (a[r] == 0) {
+                if(consumed < k) { // expand while you can
+                    consumed++;
+                    r++;
+                }
+                else { // shrink
+                    ans = max(ans, r-l);
+                    while (l<=r) {
+                        if(a[l] == 1) {
+                            l++;
+                        }
+                        else if (a[l] == 0) {
+                            consumed --;
+                            l++; break;
+                        }
+                    }
+                }
+
+            }
+        }
+        ans = max(ans, r-l); // don't forget this; this is required if we never shrink
+        return ans;
+        
+    }
+};
+
+// ----------------
+
+class Solution {
+public:
+    int longestOnes(vector<int>& a, int k) {
         
         int i,j,l,r,n=a.size();
         
