@@ -61,6 +61,9 @@ O(n)
 
 
 If one of the vectors is smaller than the other, then this technique will be better.
+The problem's follow-up asks: "What if only one of the vectors is sparse?" 
+ In that case, iterate over the sparse vector's non-zero entries and directly index into the dense one (array access, O(1)) 
+ rather than doing a two-pointer merge — since the dense vector isn't compressed, direct indexing is simpler and just as fast.
 
 Also updates will be quicker in this approach.
 
