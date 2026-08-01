@@ -1,6 +1,7 @@
 /**
 
-To get the element at position [i][j] in the result, we need to "match up" the i-th row of mat1 with the j-th column of mat2. We multiply corresponding elements and sum them up - this is essentially computing a dot product.
+To get the element at position [i][j] in the result, we need to "match up" the i-th row of mat1 with the j-th column of mat2.
+We multiply corresponding elements and sum them up - this is essentially computing a dot product.
 
 if (c1 != r2)
 	then multiplication not possible.
