@@ -4,6 +4,12 @@ If we have seen this sum already at index i;
 and current index is j
 then subarray from i+1 to j must have a sum of 0
 
+ **If the same remainder recurs at least 2 indices apart, the subarray between them sums to a multiple of k.**
+here map stores sum%k; not just sum
+
+
+
+
 if b%k == a%k
 then (b-a)%k == 0
 
