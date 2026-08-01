@@ -4,6 +4,10 @@ If we have seen this sum already at index i;
 and current index is j
 then subarray from i+1 to j must have a sum of 0
 
+if b%k == a%k
+then (b-a)%k == 0
+
+
 Test cases:
 [0,0] 0
 [1,2,3] 0
@@ -43,7 +47,7 @@ public:
                     return 1;
             }
             else  // we want subarryay of size 2, so if already seen this sum, we don't want to update that value with the new one.
-            m[sum%k] =i;
+            m[sum%k] =i; // notice we store sum%k; not sum
         }
         return 0;
     }
