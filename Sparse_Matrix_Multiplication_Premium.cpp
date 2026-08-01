@@ -1,3 +1,74 @@
+/**
+
+To get the element at position [i][j] in the result, we need to "match up" the i-th row of mat1 with the j-th column of mat2. We multiply corresponding elements and sum them up - this is essentially computing a dot product.
+
+if (c1 != r2)
+	then multiplication not possible.
+
+    vector<vector<int>> C(r1, vector<int>(c2, 0));  // result matrix: r1 x c2
+    
+    for (int i = 0; i < r1; i++) {          // each row of A
+        for (int j = 0; j < c2; j++) {      // each column of B
+            int sum = 0;
+            for (int k = 0; k < c1; k++) {  // shared dimension (c1 == r2)
+                sum += A[i][k] * B[k][j];
+            }
+            C[i][j] = sum;
+        }
+    }
+
+
+
+Now sparse multiplication-
+A (3x3):          B (3x2):
+1  2  3            1  2
+4  0  6            0  4
+7  8  0            5  0
+
+
+In both the approaches the outer 2 loops remain the same, we just optimize on the inner loop.
+Approach1-
+
+A= vector<vector<Pair>> -
+for every row, we store only the non zero columns in a vector
+a[0] = [(pos:0, val:1), (pos:1, val:2), (pos:2, val:3)]   // row 0: "1 2 3"
+a[1] = [(pos:0, val:4), (pos:2, val:6)]                   // row 1: "4 0 6" (skip the 0)
+a[2] = [(pos:0, val:7), (pos:1, val:8)]                   // row 2: "7 8 0" (skip the 0)
+
+
+B =  vector<unordered_map<Pair>>
+for every column, we store only the non zero rows but in a hashmap.
+b[0] = { 0: 1, 2: 5 }     // column 0 non-zeros: row0=1, row2=5 (row1=0 skipped)
+b[1] = { 0: 2, 1: 4 }     // column 1 non-zeros: row0=2, row1=4 (row2=0 skipped)
+
+
+
+Now we just multiple A and B. For every element of A, we look if the hashmap has that element and then multiply.
+Notice that in the final multiplication, the innermost loop is A[i,j] * B[j, k] (because we transposed columns into rows for B)
+
+
+Approach2-
+A remains the same.
+B uses vector just like A instead of map.
+B = vector<vector<Pair>>
+b[0] = [(pos:0, val:1), (pos:2, val:5)]     // column 0 non-zeros, sorted by row
+b[1] = [(pos:0, val:2), (pos:1, val:4)]     // column 1 non-zeros, sorted by row
+
+So while multiplyin A and B, we use a stratgey like merging 2 sorted vectors. This avoid expensive hashmap look ups.
+
+
+
+
+**/
+
+
+
+
+
+
+
+
+
 /*
 https://www.lintcode.com/problem/sparse-matrix-multiplication/
 https://leetcode.com/problems/sparse-matrix-multiplication/
