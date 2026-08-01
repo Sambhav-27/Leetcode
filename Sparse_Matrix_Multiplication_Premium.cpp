@@ -60,6 +60,20 @@ So while multiplyin A and B, we use a stratgey like merging 2 sorted vectors. Th
 
 
 
+If one of the vectors is smaller than the other, then Approach A will be better.
+The problem's follow-up asks: "What if only one of the vectors is sparse?"  (Approach A)
+ In that case, iterate over the sparse vector's non-zero entries and directly index into the dense one (array access, O(1)) 
+ rather than doing a two-pointer merge — since the dense vector isn't compressed, direct indexing is simpler and just as fast.
+
+
+
+
+
+
+
+
+
+
 **/
 
 
