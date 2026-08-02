@@ -4,6 +4,21 @@ first element is min element from [0, n-k]
 second element is min from [index of 1st element, n-k+1]
 third element is min from[index of 2nd elemnt, n-k+2]
 
+6 8 1 8 5 5 2 7 7     k = 3
+
+ans = 1 2 7
+
+To get the lexicographically smallest subsequence, you want the smallest possible number as early as possible.
+But you can't be greedy without limits, because you still need enough elements left in the array to fill out the rest of the length-k sequence
+
+Think like-
+
+1. You're building a result left to right.
+2. Whenever you see a new number that's smaller than what you last placed, you'd like to swap it in — removing the last one 
+and using this smaller one instead, since a smaller number earlier always wins lexicographically (just like "2..." beats "3..." no matter what follows).
+3. But you can only remove that last number if, after removing it, you'd still have enough numbers remaining in the array
+(including the current one) to complete a sequence of length k.
+
 
 
 
