@@ -1,4 +1,24 @@
 /**
+
+Processes gets interrupted and put on stack if another one starts.
+
+stack will store interrupted process' id, and when it started last time.
+
+when start time
+	process on top of stack gets interrupted
+	we add x minutes to the time of process which is on top of stack. x = cur time of incoming process - time of process on stack. NOte that this process is not popped.
+	push the incoming process to stack
+
+when end time
+	process on top of stack finishes.
+	we add x minutes to the time of process which is on top of stack. x = cur time of incoming process - time of process on stack.
+	And pop it.
+	update start time of process on top of stack to cur time.
+
+
+
+
+
 Again just implementation;
 End time in problem statement is confusing.
 See this to understand:
