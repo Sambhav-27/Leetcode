@@ -20,7 +20,7 @@ public:
 
     void insert(vector<int> &a, int index) {
         // pop while element at end is smaller than new element
-        // to maintain monotonic increasing order
+        // to maintain monotonic decreasing order from front to back
         while(!q.empty() && a[q.back()] < a[index]) {
             q.pop_back();
         }
