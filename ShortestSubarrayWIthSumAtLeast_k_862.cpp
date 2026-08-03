@@ -1,3 +1,85 @@
+
+/**
+
+1. Convert array to prefix sum array.
+2. Find 2 index j and i such that j< i and a[i] - a[j] >=k; Use deque for this.
+
+
+q is in increasing order from front to back
+
+Elements always insert at the back. And removed from the back too to maintain monotonicity.
+
+q front is only used for comparing with answer. if it's a valid comparison then we pop from the front too.
+
+1. check validity. Compare current element with q front (the oldest element). If valid then add to answer, and pop to give other elements a chance.
+
+2. add/remove from the back to maintain monotonicity.
+
+e.g.,      2 -1 5 -2 5     k = 8
+prefix = 0 2 1 6 4 9 
+
+
+
+
+**/
+
+
+#define INF 1e6
+class Solution {
+public:
+    int shortestSubarray(vector<int>& nums, int k) {
+
+        deque<int> q;
+        vector<int> a; // to store prefix;
+        a.push_back(0); // notice this. first element is 0 
+
+        for(int i=0; i<nums.size(); ++i) {
+            a.push_back(a[i] + nums[i]);
+        }
+
+
+        int ans = INF;
+
+        for(int i=0; i<a.size(); ++i) {
+
+            // compare current with q front
+            while(!q.empty() && a[i] - a[q.front()] >= k) {
+                ans = min(ans, i-q.front());
+                q.pop_front();
+            }
+
+            // maintain monotonicity by comparing with back
+            while(!q.empty() && a[i] < a[q.back()]) {
+                q.pop_back();
+            }
+            q.push_back(i);
+        }
+
+        if(ans == INF) {
+            return -1;
+        }
+        return ans;
+
+
+
+
+
+
+        
+
+
+        
+    }
+};
+
+
+
+
+
+
+-----------------------------
+    
+
 /**
 
 https://medium.com/@hch.hkcontact/goldman-sachs-top-50-leetcode-questions-q12-shortest-subarray-with-sum-at-least-k-d17e99ece755
