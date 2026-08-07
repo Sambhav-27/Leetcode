@@ -16,6 +16,41 @@ function will return id instead of string in this case
 */
 
 
+class Solution {
+public:
+    unordered_map<string, int> idMap;   // triple-key -> unique id
+    unordered_map<int, int> idCount;    // id -> how many times seen
+    vector<TreeNode*> result;
+    int nextId = 1;
+
+    int serialize(TreeNode* node) {
+        if (!node) return 0;   // 0 reserved for null
+
+        int leftId  = serialize(node->left);
+        int rightId = serialize(node->right);
+
+        // key is now 3 small integers, not a growing string
+        string key = to_string(node->val) + "," + to_string(leftId) + "," + to_string(rightId);
+
+        if (idMap.find(key) == idMap.end()) {
+            idMap[key] = nextId++;
+        }
+        int id = idMap[key];
+
+        idCount[id]++;
+        if (idCount[id] == 2) {
+            result.push_back(node);
+        }
+
+        return id;
+    }
+
+    vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
+        serialize(root);
+        return result;
+    }
+};
+
 
 /*
 
