@@ -102,7 +102,8 @@ public:
         if(!root) {
             return NULL;
         }
-        
+
+        // cannot return early unless both nodes are found
         if(root == p || root == q) {
             found++;
             // even if we found a node, we cannot return it as a lca cause then found will be 1; we still need to 
