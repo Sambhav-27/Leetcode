@@ -37,7 +37,7 @@ public:
         index++; // notice that the recursive children are not 2*i, 2*i+1; It's just a simple increment on string
         root->left = defun(s, index);
         
-        index++;
+        index++; // this works because index gets incremented to the right children after first recursive call finishes
         root->right = defun(s, index);
         
         return root;
