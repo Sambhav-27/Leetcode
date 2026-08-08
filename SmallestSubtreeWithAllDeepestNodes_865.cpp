@@ -1,3 +1,72 @@
+
+/*
+
+
+From every node return 2 things-
+1. height of current node (from leaf)
+2. which subtree deepest node lies in
+
+
+*/
+ struct Pair {
+    int height;
+    TreeNode* node;
+
+    Pair(int h, TreeNode* n) {
+        height = h;
+        node = n;
+    }
+ };
+
+class Solution {
+public:
+
+    Pair fun(TreeNode* root) {
+        if(!root) {
+            return Pair(0, root);
+        }
+
+        Pair left = fun(root->left);
+        Pair right = fun(root->right);
+
+        if(left.height == right.height) { // current node is LCA if both children have same height
+            return Pair(left.height+1, root);
+        }
+        else if (left.height > right.height) {
+            return Pair(left.height+1, left.node);
+        }
+        return Pair(right.height+1, right.node);
+    }
+
+
+
+
+    TreeNode* subtreeWithAllDeepest(TreeNode* root) {
+
+        return fun(root).node;
+        
+    }
+};
+
+-------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
 
 calculate ht when going from top to bottom, return max(leftchildHt, rightchildHt) from every node;
