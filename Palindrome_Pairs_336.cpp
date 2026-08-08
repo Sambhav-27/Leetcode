@@ -1,5 +1,74 @@
 /*
 
+let's say two words are a and b, then a + b should be a palindrom.
+For every words i, we can check every other word to be b
+
+Now, b can be broken into 2 parts= b1+b2
+
+a + b1 + b2 should be a palindrome
+
+if b1 itself is a palindrom then b2 should be reverse of a
+
+e.g., abcd + [..palindrome..] + dcba
+
+Now it's difficult to consider abcd as a and then look for [..palindrome..] + dcba
+but it's easier if we consider [..palindrome..] + dcba as a and then look for abcd
+
+so, [..palindrome..] + dcba = a
+abcd = b
+
+
+
+
+So, for every word a
+	split it every possible into 2 parts left and right
+		if left is a palindrome then look if reverse(right) is present in the input
+
+		if right is a plaindrome then check if reverse(left) is present in input
+
+*/
+
+//So step 0 of the algorithm is just: put every word into a hashmap, word -> its index.
+// Then for every split, we compute reverse(right) or reverse(left) as a string, and just check "is this string a key in my hashmap?"
+
+for (int k = 0; k <= n; k++) {          // try every split point of word w
+    string left = w.substr(0, k);
+    string right = w.substr(k);
+
+    if (isPalindrome(left)) {            // Case A from Step 5
+        string revRight = reverse(right);
+        if (revRight exists in hashmap) {
+            // that word goes BEFORE w
+        }
+    }
+
+    if (isPalindrome(right)) {           // Case B from Step 5
+        string revLeft = reverse(left);
+        if (revLeft exists in hashmap) {
+            // that word goes AFTER w
+        }
+    }
+}
+
+
+// Beware of the case when there are empty strings in input- don't double count; when a word itself is a palindrom- don't double count
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
 1. Check every word for every word; O(n*n*k)
 n = total words; k = word size
 
