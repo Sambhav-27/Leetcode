@@ -1,3 +1,17 @@
+/*
+
+A pure [left, root, right] split (inorder shape) can't be decoded from just the values — unlike a BST, a general binary tree
+has no ordering guarantee, so you can't tell from values alone where the root's split point is, or even which element is the root.
+Inorder traversal alone is fundamentally ambiguous for reconstruction (many different trees produce the same inorder sequence).
+
+To make [left, root, right] work, you need to pair it with one more piece of information that identifies the root and the split size
+— same idea as classic "construct tree from inorder + preorder" (LeetCode 105). 
+Since you're designing the serialization yourself (not just parsing arbitrary given traversals), 
+you can make this clean and O(n) without needing a value-lookup hashmap.
+
+
+*/
+
 #define DL '$'
 #define SEP '|'
 
