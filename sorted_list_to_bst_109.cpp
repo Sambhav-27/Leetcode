@@ -1,5 +1,8 @@
 /**
 nlogn
+
+You can make it O(n) by converting linked list to array..i.e. store the LL in an array
+
  */
 class Solution {
 public:
