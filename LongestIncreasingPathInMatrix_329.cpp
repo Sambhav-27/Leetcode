@@ -1,5 +1,6 @@
 /**
 No need of visited array here, the lip array is taking care of that.
+No visited array is needed because strict increase guarantees no cycles, and the memo table doubles as the "computed" marker.
 
 lip[i][j] = longest path possible sarting at (i,j);
 
