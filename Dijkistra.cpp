@@ -59,7 +59,7 @@ int dijkistra(int src, int target) {
 		if(visited[parent.id]) {
 			continue;
 		}
-		visited[parent.id] = 1;
+		visited[parent.id] = 1; // only mark visited when it's popped
 
 		for(auto child : gr[parent.id]) {
 
