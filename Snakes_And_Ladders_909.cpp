@@ -1,3 +1,102 @@
+/*
+
+Do a bfs from 1 to n*n;
+
+important info is to convert an index to row & col and get the actual value of the board from those indexes.
+
+
+*/
+
+
+struct Pair {
+    int vertex, level;
+    Pair(int v, int l) {
+        vertex = v;
+        level = l;
+    }
+};
+
+class Solution {
+
+    
+
+public:
+
+    queue<Pair> q;
+    int n;
+    
+    vector<vector<int>> a;
+
+
+    int getValue(int index) {
+
+        int rowFromBottom = (index-1)/n; // 0th index; -1 because numbers start from 1
+        int rowFromTop = n - rowFromBottom - 1;
+
+        int col = (index - 1) %n;
+        if(rowFromBottom %2 == 1) { // right to left
+            col = n - col - 1;
+        }
+
+        return a[rowFromTop][col];
+
+    }
+
+    int bfs(int start) {
+
+        vector<bool> visited(n*n+1, 0);
+
+        q.push(Pair(start, 0));
+        visited[start] = 1;
+
+        while(!q.empty()) {
+            Pair parent = q.front(); q.pop();
+
+            if(parent.vertex == n*n) {
+                return parent.level;
+            }
+
+            for(int i=1; i<=6; ++i) {
+                int child = parent.vertex + i;
+
+                if(child <= n*n) {
+                    int actualValue = getValue(child);
+
+                    if (actualValue != -1) { // if it's not -1 then it's a snake or a ladder; then directly add the destination in the queue
+                        child = actualValue;
+                    }
+                    if(!visited[child]) {
+                        q.push(Pair(child, parent.level+1));
+                        visited[child] =1;
+                    }
+
+                }
+            }
+        }
+
+        return -1;
+
+    }
+
+    int snakesAndLadders(vector<vector<int>>& board) {
+
+        n = board.size();
+        a= board;
+
+        return bfs(1);
+        
+    }
+};
+
+
+--------------
+
+
+
+
+
+
+
 /**
 1. You can do it with bfs; Just make sure to add edges of only weight 1; If you add edge of weight 0 then bfs won't work.
 2. Here, one extra condition is that one's you take a ladder or a snake, you can't take further ladders/snakes in that turn.
