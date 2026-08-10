@@ -15,6 +15,9 @@ unordered_map<string, Node> parents;
 
 We can't just have a parent pointer in Node cause parent should point to Node type.
 So, it will be like a linked list. Much simpler is to just have an array/map.
+
+
+NOTE the Time Complexity NxLx26
 */
 
 struct Node {
