@@ -1,6 +1,7 @@
 /*
 
-disjkistra only works for non negative weights.
+disjkistra only works for non negative weights. Why? because it's greedy.
+E.g., S->A (2); S->B  (4); B->A (-3). Here shortest path from S to A is 1 but dijkistra will give 2.
 it gives shortest distance from source node to all other nodes.
 
 Different from bfs in 2 aspects-
@@ -13,6 +14,9 @@ and then find a much shorter path to that same node later.
 Therefore, you update its distance and push it into the min-heap again. A node is only truly finalized when it 
 is popped out of the min-heap, not when it is pushed in
 
+
+
+Bellman Ford also provides the same but it works for negative edges too (except negative cycles).
 
 
 */
