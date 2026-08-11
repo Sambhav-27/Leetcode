@@ -1,3 +1,72 @@
+
+/*
+
+One day you eiher don't do anything; or you buy or sell, depending on what the previous transaction was.
+
+So ans = max(DoNothing, doSomething)
+
+
+
+
+*/
+
+#define N 1004
+
+class Solution {
+public:
+
+    int dp[N][104][2];// i = days; j = transactions; k = buy or sell
+    vector<int> a;
+    int n;
+
+    int getProfit(int i, int k, int prevTransaction) { // i days; k transaction
+        if(i == n || k == 0) {
+            return 0;
+        }
+
+        if(dp[i][k][prevTransaction] != -1) {
+            return dp[i][k][prevTransaction];
+        }
+
+        int doNothing = getProfit(i+1, k, prevTransaction);
+
+        int profit = 0;
+        if(prevTransaction == 1) { // previous was buy; you sell now; 1== buy; 0 == sell
+            profit += a[i] + getProfit(i+1, k-1, 0); // k only decrementing on sell
+        }
+        else {
+            profit += -a[i] + getProfit(i+1, k, 1); // note that if you're buying than you can note profit as negative
+        }
+
+        dp[i][k][prevTransaction] = max(doNothing, profit);
+        return dp[i][k][prevTransaction];
+
+    }
+
+    int maxProfit(int k, vector<int>& prices) {
+
+        a = prices;
+        n= a.size();
+
+        for(int i=0; i<=n; ++i) {
+            for(int j=0; j<=k; ++j) {
+                dp[i][j][0] = dp[i][j][1] = -1;
+            }
+        }
+
+        return getProfit(0, k, 0); // note initialized with prev transaction of sell; so that you start with buy
+        
+    }
+};
+
+
+
+---------------------
+
+
+
+
+
 /*
 
 Same as Tushar roy with k=2;
