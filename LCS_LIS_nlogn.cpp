@@ -1,3 +1,37 @@
+/*
+
+longest common subsequence
+
+if(a[i] == a[j])
+	dp(i,j) = 1+ diagonal value
+else
+	dp(i,j) = max(left value, top value)
+
+answer = dp[n][m]
+
+
+
+longest common substring
+
+if(a[i] == a[j])
+	dp(i,j) = 1+ diagonal value
+else
+	dp(i,j) = 0
+
+answer = max value present at any time in the matrix
+
+here dp(i,j) reprsent substring which end at i and j; so if they are not equal then you have to put 0 because after including a[i] and b[j] strings are not equal
+
+
+*/
+
+
+
+
+
+
+
+
 #include <bits/stdc++.h>
 using namespace std;
 #define N 100005
