@@ -1,4 +1,41 @@
 /*
+n*n solution-
+
+dp[i] = length of LIS which ends at index i
+
+for every i
+	for every j less than i
+		if(a[j] < a[i])
+			dp[i] = max(dp[i], dp[j]+1)
+
+
+
+
+nlogn solution-
+
+dp[j] means at which element in input array does Lis of length j end
+
+Lis of length j ends at a[i] if the element at which Lis of length j-1 ends is < a[i]
+i.e.
+
+dp[j] = min(dp[j], a[i])  if dp[j-1] < a[i]
+
+
+Now for every i we just need to find j;
+
+j = first element in dp which is greater than a[i]
+
+why min?
+because we want the smallest element now so that we can extend the list later on
+
+*/
+
+
+
+
+
+
+/*
 LIS: 
 
 O(nlogn);
