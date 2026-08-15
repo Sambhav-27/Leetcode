@@ -2,7 +2,7 @@
 
 longest common subsequence
 
-if(a[i] == a[j])
+if(a[i] == b[j])
 	dp(i,j) = 1+ diagonal value
 else
 	dp(i,j) = max(left value, top value)
