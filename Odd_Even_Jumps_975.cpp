@@ -2,19 +2,24 @@
 
 https://leetcode.com/problems/odd-even-jump/
 
-In odd jumps, we can go the next greater or equal element on right;
-in Even jumps, we can go the next smaller or equal element on right (just smaller element on right)
+Note that it is just greater and just smaller on right side; Not next greater or next smaller.
 
-So, for every element we want the next greater & next smaller on the right.
-We can use stack based approach just like in max hist area.
-or,
+E.f., [2,1,5,3,25]
+next greater of 2 is 5, not 25.
+just greater of 2 is 3.
 
-If we start from right & maintain the elemnts in a sorted order; Then we can find next greater & next smaller in nlogn.
+In odd jumps, we can go the just greater or equal element on right;
+in Even jumps, we can go the just smaller or equal element on right (just smaller element on right)
+
+So, for every element we want the just greater & just smaller on the right.
+
+
+If we start from right & maintain the elemnts in a sorted order; Then we can find just greater & just smaller in nlogn.
 
 
 To keep elements in sorted order, we are using a map;
-next greater or equal = lower bound
-next smaller or equal = previous element of upper bound
+just greater or equal = lower bound
+just smaller or equal = previous element of upper bound
 
 
 Now, we can use dp. For every element we maintain two variables, higher & lower;
