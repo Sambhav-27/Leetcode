@@ -5,7 +5,7 @@ output: max size submatrix composed of only 1s
 if(a(i,j) == 0)
 dp(i,j) =0
 else
-dp(i,j) =1 +max(left, up, diagonal)
+dp(i,j) =1 +min(left, up, diagonal)
 
 
 2. input 2d matrix of 0 & 1
