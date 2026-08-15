@@ -1,6 +1,8 @@
 /*
 Time: O(n^3);  O(n^2) from recursion + memoization; O(n) comes from searching in the hash table;
 
+dp[i] means string up to index i can be sedgmented into dictionary words
+
 Also see: https://leetcode.com/problems/word-break/
 */
 
