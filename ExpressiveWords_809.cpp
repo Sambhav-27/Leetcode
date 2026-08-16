@@ -16,7 +16,7 @@ public:
     // Ex: heeelo; if j=1; it will return 3
     int getLastIndex(string s, int j) {
         char ch = s[j];
-        for(int i=j+1; j<s.length(); ++i) {
+        for(int i=j+1; i<=s.length(); ++i) { // notice <=; don't forget end of string has '\0' character
             if(s[i] != ch)
                 return i-1;
         }
