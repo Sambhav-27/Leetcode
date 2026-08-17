@@ -14,6 +14,8 @@ cause this requires a rule like => a.b
 a. We can append '(' if all '(' haven;t been consumed. i.e. if count of '(' is less than n
 b. we can append ')' if count of '(' is more than ')' till now.
 
+both of above operations can be done together too
+
 This will generate all valid sequences.
 
 */
@@ -34,7 +36,7 @@ public:
         
         if(open < n) 
             fun(cur + "(", open+1, close);
-        if(open > close)
+        if(open > close) // notice this is not else if
             fun(cur + ")", open, close+1);
         
     }
