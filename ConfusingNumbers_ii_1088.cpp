@@ -1,7 +1,7 @@
 /**
 
 Problem- Count confusing number between 1 and N; N <= 10^9
-sol- don't check every number. instead generate every confusing number of X digits (X = total digits in N).
+sol- don't check every number. instead generate every confusing number of X digits (X = total digits in N). Careful about leading zeros while generating.
 
 https://code.dennyzhang.com/confusing-number-ii
 https://www.youtube.com/watch?v=j0at21HSq5Y
