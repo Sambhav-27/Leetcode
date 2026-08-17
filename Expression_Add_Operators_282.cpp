@@ -53,7 +53,7 @@ public:
         
         long num = 0;
         string x;
-        for(int i=j; i<s.length(); ++i) {
+        for(int i=j; i<s.length(); ++i) { // loop is required because you don't take just 1 digit..you can expand it
             if(i != j && s[j] == '0') break; // if there is leading zero; we only want to run for 1 iteration
             
             num *= 10;
