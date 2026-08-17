@@ -31,6 +31,26 @@ https://leetcode.com/problems/expression-add-operators/discuss/71923/Some-thougt
 Also, see official solution section
 https://leetcode.com/problems/expression-add-operators/discuss/191083/Python-Backtracking-Solution-Beating-95-with-Time-Complexity-Proof
 
+""
+                    (pos=0, choose chunk length)
+                 ┌───────────────────────┐
+              take "1"                 take "12"
+           (1-digit chunk)          (2-digit chunk)
+                 │                        │
+                "1"                     "12"
+            (val=1, pre=1)          (val=12, pre=12)
+           /      |       \          pos==len(2) → end
+          /       |        \         val=12 ≠ 3  ✗
+    +"2"        -"2"       *"2"
+     │            │           │
+  "1+2"        "1-2"       "1*2"
+  val=3        val=-1      val=1-1+1*2=2
+ pos==len(2)  pos==len(2)  pos==len(2)
+ val==3 ✅     val≠3 ✗      val≠3 ✗
+ SAVE "1+2"
+
+
+
 */
 
 class Solution {
