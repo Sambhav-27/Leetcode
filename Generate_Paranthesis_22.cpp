@@ -18,6 +18,17 @@ both of above operations can be done together too
 
 This will generate all valid sequences.
 
+""
+                        |
+                       "("
+                     /      \
+                 "(("        "()"
+                   |         /    \
+                "(()"    (blocked)  "()("
+                   |                   |
+                "(())"              "()()"
+                   ✅                  ✅
+
 */
 
 
