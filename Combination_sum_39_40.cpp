@@ -20,8 +20,10 @@ public:
             return;
         }
         
-        for(int i=j; i<a.size(); ++i) {
-            sum += a[i];
+        for(int i=j; i<a.size(); ++i) { // doesn't start from 0 because ordering doesn't matter here;
+                            // i.e. in  [2,3,6,7]; when 3 is picked you don't want to pick 2 in next iteration because [2,3] had already been previously picked
+            sum += a[i]; // this is not aggregating; notice that it gets reset after the recursive call;
+                        // so [2,3,6,7] when 3 is picked, 2 is not in the current sum
             cur.pb(a[i]);
             
             fun(i, sum, cur);
