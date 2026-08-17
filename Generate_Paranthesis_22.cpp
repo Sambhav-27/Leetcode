@@ -18,6 +18,40 @@ This will generate all valid sequences.
 
 */
 
+
+#define pb push_back
+class Solution {
+public:
+    
+    vector<string> ans;
+    int n;
+
+    void fun(string cur, int open, int close)  {
+        if(cur.length() == 2*n) { // notice 2*n
+            ans.pb(cur);
+            return;
+        }
+        
+        if(open < n) 
+            fun(cur + "(", open+1, close);
+        if(open > close)
+            fun(cur + ")", open, close+1);
+        
+    }
+    
+    vector<string> generateParenthesis(int tot) {
+        n=tot;
+        ans.clear();
+    
+        fun("", 0, 0);
+        return ans;
+    }
+};
+
+
+-----------
+
+
 #define pb push_back
 class Solution {
 public:
