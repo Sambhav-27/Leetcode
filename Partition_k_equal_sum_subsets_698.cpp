@@ -1,4 +1,7 @@
 /*
+
+this question is not continuous elements in one bucket
+
 We have to put n items in k buckets.
 At every step, 1 item has k options to be put into.
 Time: k^n
