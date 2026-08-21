@@ -5,6 +5,7 @@ https://wentao-shao.gitbook.io/leetcode/graph-search/489.robot-room-cleaner
 
 Notice how the Robot's initial posintion doesn't matter here. Robot just need to be on an unblocked cell.
 Time: 4^n; Not sure about this, it should be just 4n
+Time is 4n (from claude)
 n = total unblocked cell
 Space: n
 
