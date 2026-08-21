@@ -13,6 +13,9 @@ Sort the input first.
 Now, if cur element = previous ele & previous element wasn't chosen.
 So, don't choose this one also. [Draw a tree and check]
 
+
+Look at this to understand the uniqueness condition https://github.com/Sambhav-27/Leetcode/blob/master/Permutations.cpp
+
 */
 
 class Solution {
