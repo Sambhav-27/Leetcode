@@ -38,7 +38,7 @@ set<pair<int,int>> visited; // notice this is not a 2d array because we don't kn
             // if(!visited[u][v] && robot.move()) {
             if (!visited.count({u, v}) && robot.move()) {
                 dfs(robot, u, v, dir);
-                goBack(); // cause move function actually moves to new posn & checks; so go back so that you can try other 3 directions too
+                goBack(); // cause move function actually moves to new posn & checks; so go back to the center square so that you can try other 3 directions too
             }
             
             robot.turnRight(); // actually change dircn
