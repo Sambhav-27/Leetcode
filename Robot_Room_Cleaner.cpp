@@ -17,7 +17,7 @@ set<pair<int,int>> visited; // notice this is not a 2d array because we don't kn
 // can use unordered_set too but then would need custom hash function too
 
     // this means you go back to the original square you came from (i.e. the center square). Turn 180 degree and move; and then again turn 180 degree to face the original way
-    void goBack(Robot r) {
+    void goBack(Robot &r) {
         r.turnRight();
         r.turnRight();
         r.move();
@@ -27,7 +27,7 @@ set<pair<int,int>> visited; // notice this is not a 2d array because we don't kn
     
     int dirs[4][2] = {-1,0, 0,1, 1,0, 0,-1}; // order matters here; up right down left
     
-    void dfs(Robot robot, int r, int c, int dir) {
+    void dfs(Robot &robot, int r, int c, int dir) {
         visited.insert({r, c}); // visited[r][c] = 1;
         robot.clean();
         
@@ -38,7 +38,7 @@ set<pair<int,int>> visited; // notice this is not a 2d array because we don't kn
             // if(!visited[u][v] && robot.move()) {
             if (!visited.count({u, v}) && robot.move()) {
                 dfs(robot, u, v, dir);
-                goBack(); // cause move function actually moves to new posn & checks; so go back to the center square so that you can try other 3 directions too
+                goBack(robot); // cause move function actually moves to new posn & checks; so go back to the center square so that you can try other 3 directions too
             }
             
             robot.turnRight(); // actually change dircn
