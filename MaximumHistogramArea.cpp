@@ -71,3 +71,52 @@ public:
     
     
 };
+
+
+
+-----------
+
+// following is java code; easiet to understand. 2 pass
+
+
+    class Solution {
+    public int largestRectangleArea(int[] a) {
+
+        Stack<Integer> st = new Stack<>();
+
+        int n = a.length;
+        int[] leftMin = new int[n];
+
+        for(int i=0; i<n; ++i) {
+            while(!st.empty() && a[st.peek()] >= a[i]) {
+                st.pop();
+            }
+            leftMin[i] = st.empty() ? -1 : st.peek();
+            st.push(i);
+        }
+
+        while(!st.empty()) { // because we're using the same stack for right side too
+            st.pop();
+        }
+
+        int[] rightMin = new int[n];
+
+        for(int i = n-1; i>=0; --i) {
+            while(!st.empty() && a[st.peek()] > a[i]) {
+                st.pop();
+            }
+            rightMin[i] = st.empty() ? n : st.peek();
+            st.push(i);
+        }
+
+        int ans = 0;
+        for(int i=0; i<n; ++i) {
+
+            ans = Math.max(ans, (a[i] * (rightMin[i] - leftMin[i] - 1)));
+            
+        }
+
+        return ans;
+        
+    }
+}
