@@ -88,7 +88,7 @@ public:
         int[] leftMin = new int[n];
 
         for(int i=0; i<n; ++i) {
-            while(!st.empty() && a[st.peek()] >= a[i]) {
+            while(!st.empty() && a[st.peek()] >= a[i]) { // notice this; one side less than equal to
                 st.pop();
             }
             leftMin[i] = st.empty() ? -1 : st.peek();
@@ -102,7 +102,7 @@ public:
         int[] rightMin = new int[n];
 
         for(int i = n-1; i>=0; --i) {
-            while(!st.empty() && a[st.peek()] > a[i]) {
+            while(!st.empty() && a[st.peek()] > a[i]) { // other side not
                 st.pop();
             }
             rightMin[i] = st.empty() ? n : st.peek();
