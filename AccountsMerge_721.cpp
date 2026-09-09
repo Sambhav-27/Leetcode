@@ -58,6 +58,26 @@ public:
                 rank[a]++;
         }
     }
+
+    void merge(int u, int v) {
+
+        int p1 = findParent(u); // notice here findParent gives root of tree; parent[] is just immediate parent
+        int p2 = findParent(v);
+        
+        if(p1 != p2) {
+            if(rank[p2] > rank[p1]) { // rank is only meaningful for parents; not for non-parent nodes
+                parent[p1] = p2;
+            }
+            else if (rank[p2] < rank[p1]) {
+                parent[p2] = p1;
+            }
+            else {
+                parent[p2] = p1;
+                rank[p1]++;
+            }
+        }
+        
+    }
     
     vector<vector<string>> accountsMerge(vector<vector<string>>& a) {
         
