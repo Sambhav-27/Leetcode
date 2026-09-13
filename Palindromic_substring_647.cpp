@@ -10,11 +10,11 @@ class Solution {
 public:
     
     int expand(string s, int l, int r) {
-        int len = 0;
+        int totalSubstrings = 0;
         while(l>=0 && r<s.length() && s[l--] == s[r++]) {
-            len++;
+            totalSubstrings++;
         }
-        return len;
+        return totalSubstrings;
     }
     
     int countSubstrings(string s) {
