@@ -6,6 +6,10 @@ https://leetcode.com/problems/number-of-matching-subsequences/discuss/117634/Eff
 
 Time = n + sum of characters across all words
 
+n * m is for a solution where you check a character of s and compare it with current point of each word
+
+
+
 Don't check if every word is a subsequence of s;
 Instead keep a list of words for every letter. Each word in that list is waiting for that letter.
 Ex: s = abcde
