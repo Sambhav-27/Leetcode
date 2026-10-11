@@ -2,7 +2,9 @@
 
 https://leetcode.com/problems/number-of-matching-subsequences/discuss/117634/Efficient-and-simple-go-through-words-in-parallel-with-explanation
 
-Time: O(n * m); // n = length of s; m = total words
+// this is wrong = Time: O(n * m); // n = length of s; m = total words
+
+Time = n + sum of characters across all words
 
 Don't check if every word is a subsequence of s;
 Instead keep a list of words for every letter. Each word in that list is waiting for that letter.
