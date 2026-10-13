@@ -1,3 +1,147 @@
+
+/*
+
+
+Notice that question is to pick 3 non overlapping subarrays such that total sum is maximum; not top 3 subarrays with maximum sum.
+E.g., 2 2 3 4 1 5 2
+
+max sum across 3 arrays = [2 2] [3 4] [5 2]
+
+Cannot be solved using greedy because you can sacrifice sum of current array to maximize next subarray
+
+
+
+
+
+
+top down dp where
+
+
+f(j, k) means sum of k non overlapping subarrays starting at index j;
+so you can either start a new window at j or don't start it
+
+f(j+m, k-1) ; element picked at j; k-1 arrays need to be picked from rest of elements
+f(j+1, k) ; not picked; pick k subarrays starting at next element
+
+
+f(j, k) = max(don't pick, pick);
+
+Time = (n*k)
+
+
+
+*/
+
+#define N 20004
+#define INF 1000000
+
+class Solution {
+public:
+
+    vector<int> a;
+    vector<int> prefix;
+    int m;
+
+    int dp[N][4];
+
+    int fun(int j, int k) {
+        if(k == 0 ) {
+            return 0;
+        }
+
+        if(j + (m-1) >= a.size()) { // m elements starting from j
+            return -INF; // this question guarantees feasibility so this is not used
+        }
+
+        if(dp[j][k] != -1) {
+            return dp[j][k];
+        }
+
+        int take = fun(j+m, k-1);
+        int skip = fun(j+1, k);
+
+        int takesum = prefix[j+m] - prefix[j] + take;
+
+        return dp[j][k] = max(takesum, skip); 
+    }
+
+    vector<int> maxSumOfThreeSubarrays(vector<int>& nums, int subarraySize) {
+        
+        a = nums;
+        m = subarraySize;
+        int k = 3;
+
+        prefix.resize(a.size()+1);
+        prefix[0] = 0;
+
+        for(int i=0; i<a.size(); ++i) {
+            prefix[i+1] = prefix[i] + a[i];
+        }
+
+        for(int i=0; i<=a.size(); ++i) {
+            for(int j=0; j<=k; ++j) {
+                dp[i][j] = -1;
+            }
+        }
+
+
+        int sum = fun(0, k);
+
+        vector<int> ans;
+
+        // best sum is at dp(0, k), not dp(n-1, k) because we define dp as range starting at i, not ending at i
+
+
+        
+
+        // write the matrix on paper then it is easy to write following loop
+        // traverse the dp array from ans which is at (0, k);
+        // row = j; col = k
+        int j = 0;
+        while (k > 0) {
+            int take = prefix[j+m] - prefix[j] + fun(j+m, k-1); // fun just returns the memoized dp array covering bases cases which are not in dp array
+            int skip = fun(j+1, k);
+
+            if(take >= skip) { // equal to because we want lexicographically smallest indices
+                ans.push_back(j);
+                k--;
+                j+= m;
+            }
+            else {
+                j++;
+            }
+        }
+
+        
+
+        
+        
+        return ans;
+    }
+};
+
+
+
+////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 
 dp[i][j] = max sum with i subarray ending at jth number
