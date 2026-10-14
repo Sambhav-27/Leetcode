@@ -68,3 +68,44 @@ public:
         
     }
 };
+
+
+
+
+
+///////////////////
+
+// lexicographically largest; 
+
+vector<int> getLargestSubs(vector<int> &a, int k) {
+        stack<int> st;
+
+        int n = a.size();
+
+        for(int i=0; i<n; ++i) {
+            
+            while(!st.empty() && a[i] > st.top()) {
+                int left = n - i; // including current
+                int taken = st.size();
+
+                if(left + taken > k) {
+                    st.pop();
+                }
+                else break;
+            }
+
+            if(st.size() < k) {
+                st.push(a[i]);
+            }
+        }
+
+        vector<int> ans;
+        while(!st.empty()) {
+            ans.push_back(st.top()); st.pop();
+        }
+
+        reverse(ans.begin(), ans.end());
+
+        return ans;
+
+    }
